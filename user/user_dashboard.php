@@ -108,7 +108,7 @@ try {
             </a>
 
 
-            <a href="my_faults.php" class="nav-link">
+            <a href="my_fault.php" class="nav-link">
                 <i class="fa-solid fa-list-check"></i>
                 <span>My Faults</span>
             </a>
@@ -367,25 +367,15 @@ try {
                         </div>
 
 
-                        <a href="my_faults.php" class="view-all">
-
+                        <a href="my_fault.php" class="view-all">
                             View All
-
                             <i class="fa-solid fa-arrow-right"></i>
-
                         </a>
 
                     </div>
-
-
-
                     <!-- FAULT TABLE -->
-
                     <div class="table-container">
-
                         <table>
-
-
                             <thead>
 
                                 <tr>
@@ -408,37 +398,24 @@ try {
 
 
 
-                            <tbody>
-
-
-                                <?php if (!empty($recentFaults)) { ?>
-
-
+                         <tbody>
+                        <?php if (!empty($recentFaults)) { ?>
                                     <?php foreach ($recentFaults as $row) { ?>
+                         <tr>
+                            <td><?php
+                            echo htmlspecialchars($row['ticket_number']); ?>
 
-
-                                        <tr>
-
-
-                                            <!-- TICKET NUMBER -->
-
-                                            <td>
-
-                                                <?php
-                        echo htmlspecialchars($row['ticket_number']);
-                                        ?>
-
-                                            </td>
+                                 </td>
 
 
 
                                             <!-- FAULT CATEGORY -->
 
-                                            <td>
+                                 <td>
 
-                                                <?php echo htmlspecialchars((string) ($row['category'] ?? $row['category_name'] ?? $row['category_id'] ?? '')); ?>
+                                    <?php echo htmlspecialchars((string) ($row['category'] ?? $row['category_name'] ?? $row['category_id'] ?? '')); ?>
 
-                                            </td>
+                                     </td>
 
 
 

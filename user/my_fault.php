@@ -1,13 +1,13 @@
 <?php
-require_once __DIR__ . '/../config/auth_check.php';
+require_once __DIR__.'/../config/auth_check.php';
 requireRole('student');                       // only students may open this page
-require_once __DIR__ . '/../config/database.php';
+require_once __DIR__.'/../config/database.php';
 
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
 const DEBUG = true;                           // set to false before going live
 
-$userId   = (int) $_SESSION['user_id'];
+$userId = (int) $_SESSION['user_id'];
 $username = $_SESSION['name'] ?? 'User';
 
 function h($value): string
@@ -22,10 +22,11 @@ function fetchFaults(mysqli $conn, string $sql, int $userId): array
     $stmt->execute();
     $rows = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     $stmt->close();
+
     return $rows;
 }
 
-$faults  = [];
+$faults = [];
 $dbError = null;
 
 try {
@@ -42,7 +43,7 @@ try {
         );
     } catch (mysqli_sql_exception $e) {
         // The categories table/columns are named differently: fall back to the faults table alone
-        error_log('CampusFix my_faults join failed: ' . $e->getMessage());
+        error_log('CampusFix my_faults join failed: '.$e->getMessage());
         $faults = fetchFaults(
             $conn,
             'SELECT * FROM faults WHERE user_id = ? ORDER BY id DESC',
@@ -50,10 +51,10 @@ try {
         );
     }
 } catch (mysqli_sql_exception $e) {
-    error_log('CampusFix my_faults error: ' . $e->getMessage());
+    error_log('CampusFix my_faults error: '.$e->getMessage());
     $dbError = 'An error has occurred while loading your faults from the database.';
     if (DEBUG) {
-        $dbError .= ' (' . $e->getMessage() . ')';
+        $dbError .= ' ('.$e->getMessage().')';
     }
 }
 
@@ -61,11 +62,11 @@ $counts = ['total' => count($faults), 'pending' => 0, 'progress' => 0, 'resolved
 foreach ($faults as $f) {
     $s = strtolower(trim($f['fault_status'] ?? ''));
     if ($s === 'pending') {
-        $counts['pending']++;
+        ++$counts['pending'];
     } elseif ($s === 'in progress') {
-        $counts['progress']++;
+        ++$counts['progress'];
     } elseif ($s === 'resolved') {
-        $counts['resolved']++;
+        ++$counts['resolved'];
     }
 }
 ?>
@@ -380,14 +381,14 @@ foreach ($faults as $f) {
                     <?php foreach ($faults as $fault) {
                         $category = $fault['category_name'] ?? $fault['category'] ?? $fault['category_id'] ?? '';
                         $location = $fault['fault_location'] ?? $fault['location'] ?? '';
-                        $status   = $fault['fault_status'] ?? 'Pending';
-                        $statusClass = 'st-' . trim(preg_replace('/[^a-z]+/', '-', strtolower($status)), '-');
+                        $status = $fault['fault_status'] ?? 'Pending';
+                        $statusClass = 'st-'.trim(preg_replace('/[^a-z]+/', '-', strtolower($status)), '-');
                         $priority = $fault['priority'] ?? '';
                         $date = !empty($fault['created_at'])
                             ? date('d M Y, H:i', strtotime($fault['created_at']))
                             : '';
                         $isDone = strtolower(trim($status)) === 'resolved';
-                        $sub = trim($location . ($location !== '' && !empty($fault['ticket_number']) ? ' · ' : '') . ($fault['ticket_number'] ?? ''));
+                        $sub = trim($location.($location !== '' && !empty($fault['ticket_number']) ? ' · ' : '').($fault['ticket_number'] ?? ''));
                         ?>
 
                         <article class="fl-card<?php echo $isDone ? ' fl-card-done' : ''; ?>">
@@ -435,13 +436,6 @@ foreach ($faults as $f) {
                             <?php if (!empty($fault['fault_description'])) { ?>
                                 <div class="fl-note"><?php echo nl2br(h($fault['fault_description'])); ?></div>
                             <?php } ?>
-
-                            <div class="fl-foot">
-                                <a href="view_fault.php?id=<?php echo (int) $fault['id']; ?>">
-                                    View Details <i class="fa-solid fa-arrow-right"></i>
-                                </a>
-                            </div>
-
                         </article>
 
                     <?php } ?>

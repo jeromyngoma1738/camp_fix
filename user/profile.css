@@ -1,0 +1,272 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+body {
+    background: #f4f7f5;
+    color: #333;
+    min-height: 100vh;
+    padding: 40px 20px;
+}
+
+.profile-container {
+    max-width: 950px;
+    margin: 0 auto;
+}
+
+/* Profile Header */
+.profile-header {
+    margin-bottom: 25px;
+}
+
+.profile-header h2 {
+    font-size: 28px;
+    color: #176b3a;
+    margin-bottom: 8px;
+}
+
+.profile-header p {
+    color: #777;
+    font-size: 14px;
+}
+
+/* Profile Card */
+.profile-card {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+}
+
+/* Profile Top */
+.profile-top {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.avatar {
+    width: 85px;
+    height: 85px;
+    background: #176b3a;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 27px;
+    font-weight: 600;
+}
+
+.profile-details {
+    flex: 1;
+}
+
+.profile-details h2 {
+    font-size: 22px;
+    margin-bottom: 5px;
+    color: #222;
+}
+
+.profile-details p {
+    color: #888;
+    font-size: 14px;
+    margin-bottom: 9px;
+}
+
+.role {
+    display: inline-block;
+    background: #e6f4eb;
+    color: #176b3a;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+/* Edit Button */
+.edit-btn {
+    background: #176b3a;
+    color: white;
+    border: none;
+    padding: 11px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.edit-btn:hover {
+    background: #10542c;
+}
+
+/* Divider */
+hr {
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 25px 0;
+}
+
+/* Section Headings */
+form h3 {
+    color: #176b3a;
+    font-size: 17px;
+    margin-bottom: 20px;
+    margin-top: 25px;
+}
+
+/* Form Grid */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    outline: none;
+    font-size: 14px;
+    color: #333;
+    background: #f9faf9;
+    transition: 0.3s;
+}
+
+.form-group input:disabled {
+    background: #f5f6f5;
+    color: #777;
+    cursor: not-allowed;
+}
+
+.form-group input:not(:disabled) {
+    background: white;
+    border-color: #176b3a;
+}
+
+.form-group input:focus {
+    border-color: #176b3a;
+    box-shadow: 0 0 0 3px rgba(23, 107, 58, 0.1);
+}
+
+/* Account Information */
+.account-info {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.account-info div {
+    background: #f7faf8;
+    padding: 18px;
+    border-radius: 8px;
+    border: 1px solid #e8eee9;
+}
+
+.account-info span {
+    display: block;
+    color: #888;
+    font-size: 12px;
+    margin-bottom: 8px;
+}
+
+.account-info strong {
+    color: #333;
+    font-size: 14px;
+}
+
+/* Form Actions */
+.form-actions {
+    display: none;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.save-btn,
+.cancel-btn {
+    padding: 11px 22px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.save-btn {
+    background: #176b3a;
+    color: white;
+}
+
+.save-btn:hover {
+    background: #10542c;
+}
+
+.cancel-btn {
+    background: #eee;
+    color: #444;
+}
+
+.cancel-btn:hover {
+    background: #ddd;
+}
+
+/* Responsive Design */
+@media (max-width: 700px) {
+
+    body {
+        padding: 20px 12px;
+    }
+
+    .profile-card {
+        padding: 20px;
+    }
+
+    .profile-top {
+        flex-wrap: wrap;
+    }
+
+    .profile-details {
+        min-width: 150px;
+    }
+
+    .edit-btn {
+        width: 100%;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .account-info {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-header h2 {
+        font-size: 23px;
+    }
+}
